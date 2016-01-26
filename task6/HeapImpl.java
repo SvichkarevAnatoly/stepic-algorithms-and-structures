@@ -1,16 +1,17 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeapImpl implements Heap {
     private List<Integer> arr;
 
     public HeapImpl(List<Integer> arr) {
-        this.arr = arr;
+        this.arr = new ArrayList<>(arr);
         buildHeap();
     }
 
     private void buildHeap() {
         final int size = arr.size();
-        for (int i = size / 2 - 1; i > 0; i--) {
+        for (int i = size / 2 - 1; i >= 0; i--) {
             siftDown(i);
         }
     }
