@@ -15,7 +15,6 @@ public class HeapImpl implements Heap {
         }
     }
 
-    @Override
     public void siftDown(int i) {
         int left = i * 2 + 1;
         int right = i * 2 + 2;
@@ -27,16 +26,30 @@ public class HeapImpl implements Heap {
             largest = right;
         }
         if (largest != i) {
-            int tmp = arr.get(largest);
-            arr.set(largest, arr.get(i));
-            arr.set(i, tmp);
-
+            swap(i, largest);
             siftDown(largest);
         }
     }
 
-    @Override
+    private void swap(int i1, int i2) {
+        int tmp = arr.get(i2);
+        arr.set(i2, arr.get(i1));
+        arr.set(i1, tmp);
+    }
+
     public void siftUp(int i) {
+        while (i > 0) {
+            int parent = (i - 1) / 2;
+            if (arr.get(i) <= arr.get(parent)) {
+                return;
+            }
+            swap(i, parent);
+            i = parent;
+        }
+    }
+
+    @Override
+    public void add(int element) {
 
     }
 }
