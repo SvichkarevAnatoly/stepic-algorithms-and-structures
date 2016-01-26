@@ -19,7 +19,7 @@ public class HeapImpl implements Heap {
         int left = i * 2 + 1;
         int right = i * 2 + 2;
         int largest = i;
-        if (left < arr.size() && arr.get(left) > arr.get(i)){
+        if (left < arr.size() && arr.get(left) > arr.get(i)) {
             largest = left;
         }
         if (right < arr.size() && arr.get(right) > arr.get(largest)) {
@@ -50,6 +50,17 @@ public class HeapImpl implements Heap {
 
     @Override
     public void add(int element) {
+        arr.add(element);
+        siftUp(arr.size() - 1);
+    }
 
+    @Override
+    public int extractMax() {
+        int result = arr.get(0);
+        arr.set(0, arr.remove(arr.size() - 1));
+        if (!arr.isEmpty()) {
+            siftDown(0);
+        }
+        return result;
     }
 }
