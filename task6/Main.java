@@ -12,14 +12,14 @@ public class Main {
         System.out.println(approaches);
     }
 
-    private static int measureApproaches(Heap heap, int k) {
+    public static int measureApproaches(Heap heap, int k) {
         int numApproaches = 0;
         while (!heap.isEmpty()) {
             final ArrayList<Integer> selectedFruits = new ArrayList<>();
-            for (int i = 0; i < k; i++) {
+            for (int i = 0; i < k && !heap.isEmpty(); i++) {
                 final int fruitMass = heap.extractMax();
                 final int cutFruitMass = (fruitMass + 1) / 2;
-                if (cutFruitMass != 1) {
+                if (fruitMass != 1) {
                     selectedFruits.add(cutFruitMass);
                 }
             }
