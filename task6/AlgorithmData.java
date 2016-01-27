@@ -14,4 +14,9 @@ public class AlgorithmData {
         }
         K = sc.nextInt();
     }
+
+    public AlgorithmData(List<Integer> fm, int K) {
+        fruitMasses = fm;
+        this.K = K;
+    }
 }
