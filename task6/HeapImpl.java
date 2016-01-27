@@ -4,6 +4,10 @@ import java.util.List;
 public class HeapImpl implements Heap {
     private List<Integer> arr;
 
+    public HeapImpl() {
+        arr = new ArrayList<>();
+    }
+
     public HeapImpl(List<Integer> arr) {
         this.arr = new ArrayList<>(arr);
         buildHeap();
@@ -53,6 +57,16 @@ public class HeapImpl implements Heap {
     public void add(int element) {
         arr.add(element);
         siftUp(arr.size() - 1);
+    }
+
+    @Override
+    public void addAll(List<Integer> elements) {
+        elements.forEach(this::add);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return arr.isEmpty();
     }
 
     @Override
