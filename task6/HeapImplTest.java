@@ -59,6 +59,6 @@ public class HeapImplTest {
         final Heap heap = new HeapImpl(ad.fruitMasses);
         final int approaches = Main.measureApproaches(heap, ad.K);
 
-        assertEquals(3, approaches);
+        assertEquals(4, approaches);
     }
 }

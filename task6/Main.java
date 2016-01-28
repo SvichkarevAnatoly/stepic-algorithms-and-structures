@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,16 +15,27 @@ public class Main {
 
     public static int measureApproaches(Heap heap, int k) {
         int numApproaches = 0;
+        int sumMass = 0;
+        List<Integer> restedFruits = new ArrayList<>();
+        boolean isApproaches = false;
         while (!heap.isEmpty()) {
-            final ArrayList<Integer> selectedFruits = new ArrayList<>();
-            for (int i = 0; i < k && !heap.isEmpty(); i++) {
-                final int fruitMass = heap.extractMax();
-                final int cutFruitMass = (fruitMass + 1) / 2;
+            isApproaches = true;
+            final int fruitMass = heap.popMax();
+            if (sumMass + fruitMass <= k) {
+                sumMass += heap.extractMax();
                 if (fruitMass != 1) {
-                    selectedFruits.add(cutFruitMass);
+                    final int cutFruitMass = (fruitMass + 1) / 2;
+                    restedFruits.add(cutFruitMass);
                 }
+            } else {
+                heap.addAll(restedFruits);
+                restedFruits = new ArrayList<>();
+                sumMass = 0;
+                numApproaches++;
+                isApproaches = false;
             }
-            heap.addAll(selectedFruits);
+        }
+        if (isApproaches) {
             numApproaches++;
         }
         return numApproaches;
