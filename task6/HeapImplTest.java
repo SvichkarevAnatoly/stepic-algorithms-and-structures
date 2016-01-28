@@ -52,7 +52,7 @@ public class HeapImplTest {
     }
 
     @Test
-    public void testAlgorithm() throws Exception {
+    public void testAlgorithmOnTaskSample() throws Exception {
         final ArrayList<Integer> fruitMasses = new ArrayList<>(Arrays.asList(1, 2, 2));
         final AlgorithmData ad = new AlgorithmData(fruitMasses, 2);
 
@@ -60,5 +60,38 @@ public class HeapImplTest {
         final int approaches = Main.measureApproaches(heap, ad.K);
 
         assertEquals(4, approaches);
+    }
+
+    @Test
+    public void testAlgorithmOnCommentSample() throws Exception {
+        final ArrayList<Integer> fruitMasses = new ArrayList<>(Arrays.asList(4, 3, 5));
+        final AlgorithmData ad = new AlgorithmData(fruitMasses, 6);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(4, approaches);
+    }
+
+    @Test
+    public void testAlgorithmOnCommentSample2() throws Exception {
+        final ArrayList<Integer> fruitMasses = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 1, 1, 1));
+        final AlgorithmData ad = new AlgorithmData(fruitMasses, 3);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(3, approaches);
+    }
+
+    @Test
+    public void testAlgorithmOnCommentSample3() throws Exception {
+        final ArrayList<Integer> fruitMasses = new ArrayList<>(Arrays.asList(4, 1));
+        final AlgorithmData ad = new AlgorithmData(fruitMasses, 6);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(1, approaches);
     }
 }
