@@ -5,6 +5,8 @@ public interface Heap {
 
     int extractMax();
 
+    int popMax();
+
     void addAll(List<Integer> elements);
 
     boolean isEmpty();

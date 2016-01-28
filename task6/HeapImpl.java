@@ -71,15 +71,23 @@ public class HeapImpl implements Heap {
 
     @Override
     public int extractMax() {
-        int result = arr.get(0);
         if (arr.isEmpty()) {
             throw new IndexOutOfBoundsException();
         }
+        int result = arr.get(0);
         final int removed = arr.remove(arr.size() - 1);
         if (!arr.isEmpty()) {
             arr.set(0, removed);
             siftDown(0);
         }
         return result;
+    }
+
+    @Override
+    public int popMax() {
+        if (arr.isEmpty()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return arr.get(0);
     }
 }
