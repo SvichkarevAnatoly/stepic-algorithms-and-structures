@@ -25,7 +25,7 @@ public class HeapImplTest {
         assertEquals(1, heap.extractMax());
     }
 
-    @Test(expected=IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testExtractException() throws Exception {
         final Heap heap = new HeapImpl(Collections.<Integer>emptyList());
         heap.extractMax();
@@ -44,8 +44,8 @@ public class HeapImplTest {
     public void testAlgorithmDataParse() throws Exception {
         final String inputString =
                 "3\n" +
-                "1 2 2\n" +
-                "2";
+                        "1 2 2\n" +
+                        "2";
         final AlgorithmData ad = parseTestInputLine(inputString);
 
         final ArrayList<Integer> expectedFruitMasses = new ArrayList<>(Arrays.asList(1, 2, 2));
@@ -99,6 +99,17 @@ public class HeapImplTest {
     }
 
     @Test
+    public void testAlgorithmOnCommentSample2_1() throws Exception {
+        final String args = "12|1 4 8 9 10 40 45 50 60 70 80 100|100";
+        final AlgorithmData ad = parseTestInputLine(args);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(13, approaches);
+    }
+
+    @Test
     public void testAlgorithmOnCommentSample2_2() throws Exception {
         final String args = "7|1 3 5 7 9 11 13|25";
         final AlgorithmData ad = parseTestInputLine(args);
@@ -107,5 +118,16 @@ public class HeapImplTest {
         final int approaches = Main.measureApproaches(heap, ad.K);
 
         assertEquals(5, approaches);
+    }
+
+    @Test
+    public void testAlgorithmOnCommentSample2_3() throws Exception {
+        final String args = "10| 1 1 1 1 1 1 1 1 1 10|11";
+        final AlgorithmData ad = parseTestInputLine(args);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(4, approaches);
     }
 }
