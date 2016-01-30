@@ -5,6 +5,10 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 public class HeapImplTest {
+    private AlgorithmData parseTestInputLine(String line) {
+        return new AlgorithmData(line.replace("|", " "));
+    }
+
     @Test
     public void testExtractMax() throws Exception {
         final List<Integer> arr = Arrays.asList(1, 6, 3);
@@ -42,8 +46,7 @@ public class HeapImplTest {
                 "3\n" +
                 "1 2 2\n" +
                 "2";
-        final Scanner sc = new Scanner(inputString);
-        final AlgorithmData ad = new AlgorithmData(sc);
+        final AlgorithmData ad = parseTestInputLine(inputString);
 
         final ArrayList<Integer> expectedFruitMasses = new ArrayList<>(Arrays.asList(1, 2, 2));
         assertEquals(expectedFruitMasses.size(), ad.fruitMasses.size());
@@ -93,5 +96,16 @@ public class HeapImplTest {
         final int approaches = Main.measureApproaches(heap, ad.K);
 
         assertEquals(1, approaches);
+    }
+
+    @Test
+    public void testAlgorithmOnCommentSample2_2() throws Exception {
+        final String args = "7|1 3 5 7 9 11 13|25";
+        final AlgorithmData ad = parseTestInputLine(args);
+
+        final Heap heap = new HeapImpl(ad.fruitMasses);
+        final int approaches = Main.measureApproaches(heap, ad.K);
+
+        assertEquals(5, approaches);
     }
 }
