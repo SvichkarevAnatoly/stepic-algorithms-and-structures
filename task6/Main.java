@@ -18,13 +18,19 @@ public class Main {
         int sumMass = 0;
         List<Integer> restedFruits = new ArrayList<>();
         boolean isApproaches = false;
-        while (!heap.isEmpty()) {
+        while (!heap.isEmpty() || !restedFruits.isEmpty()) {
             isApproaches = true;
+            if (heap.isEmpty()) {
+                heap.addAll(restedFruits);
+                restedFruits = new ArrayList<>();
+                sumMass = 0;
+                numApproaches++;
+            }
             final int fruitMass = heap.popMax();
             if (sumMass + fruitMass <= k) {
                 sumMass += heap.extractMax();
                 if (fruitMass != 1) {
-                    final int cutFruitMass = (fruitMass + 1) / 2;
+                    final int cutFruitMass = fruitMass / 2;
                     restedFruits.add(cutFruitMass);
                 }
             } else {
